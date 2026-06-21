@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schnitt & Stil – Friseursalon</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #1c1410;
+  --clay: #c4724a;
+  --clay-light: #f0d5c5;
+  --sand: #f7f2ec;
+  --mist: #e8e0d6;
+  --white: #ffffff;
+  --gray: #8a7f78;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--sand);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(247,242,236,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--mist);
+}
+
+.nav-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--clay); font-style: italic; }
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--clay); }
+
+.nav-cta {
+  background: var(--ink);
+  color: var(--white) !important;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  transition: background 0.2s !important;
+}
+
+.nav-cta:hover { background: var(--clay) !important; color: var(--white) !important; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--clay-light) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 600px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(48px, 7vw, 80px);
+  line-height: 1.05;
+  color: var(--ink);
+  margin-bottom: 28px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--clay);
+}
+
+.hero p {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--gray);
+  max-width: 460px;
+  margin-bottom: 40px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--clay);
+  color: var(--white);
+  padding: 14px 30px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.1s;
+  display: inline-block;
+}
+
+.btn-primary:hover { background: #b05e38; transform: translateY(-1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  padding: 14px 30px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1.5px solid var(--mist);
+  transition: border-color 0.2s;
+  display: inline-block;
+}
+
+.btn-secondary:hover { border-color: var(--clay); color: var(--clay); }
+
+.hero-visual {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 45%;
+  background: linear-gradient(135deg, var(--clay-light) 0%, var(--mist) 100%);
+  clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 120px;
+}
+
+/* SERVICES */
+.services {
+  padding: 100px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  color: var(--ink);
+  margin-bottom: 60px;
+  max-width: 400px;
+  line-height: 1.15;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.service-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 32px 28px;
+  border: 1px solid var(--mist);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.service-card:hover {
+  border-color: var(--clay);
+  transform: translateY(-3px);
+}
+
+.service-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.service-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.service-card p {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.service-price {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--clay);
+}
+
+.service-price span {
+  font-size: 13px;
+  color: var(--gray);
+  font-weight: 400;
+}
+
+/* ABOUT */
+.about {
+  background: var(--ink);
+  padding: 100px 40px;
+  color: var(--white);
+}
+
+.about-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about .section-label { color: var(--clay-light); }
+
+.about h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.about h2 em { color: var(--clay); font-style: italic; }
+
+.about p {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 16px;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.stat {
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 42px;
+  color: var(--clay);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+}
+
+/* OPENING HOURS */
+.hours {
+  padding: 100px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.hours-table {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--mist);
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--mist);
+  font-size: 15px;
+}
+
+.hours-row:last-child { border-bottom: none; }
+.hours-row.today { background: var(--clay-light); font-weight: 500; }
+.hours-closed { color: var(--gray); }
+
+/* CHATBOT */
+.chat-section {
+  background: var(--clay-light);
+  padding: 100px 40px;
+}
+
+.chat-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.chat-intro .section-label { color: var(--clay); }
+
+.chat-intro h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.chat-intro p {
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* Chat Widget */
+.chat-widget {
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 8px 48px rgba(28,20,16,0.14);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+}
+
+.chat-widget-header {
+  background: var(--ink);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-avatar {
+  width: 38px; height: 38px;
+  background: var(--clay);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.chat-widget-header h4 {
+  font-family: 'DM Serif Display', serif;
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.chat-widget-header p {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+}
+
+.chat-dot {
+  width: 8px; height: 8px;
+  background: #4cce7a;
+  border-radius: 50%;
+  margin-left: auto;
+  box-shadow: 0 0 6px #4cce7a;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+
+.chat-messages::-webkit-scrollbar { width: 3px; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--mist); border-radius: 2px; }
+
+.cmsg {
+  display: flex;
+  flex-direction: column;
+  max-width: 85%;
+  animation: msgIn 0.25s ease;
+}
+
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cmsg.bot { align-self: flex-start; }
+.cmsg.user { align-self: flex-end; }
+
+.cbubble {
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.cmsg.bot .cbubble {
+  background: var(--sand);
+  color: var(--ink);
+  border-bottom-left-radius: 4px;
+}
+
+.cmsg.user .cbubble {
+  background: var(--clay);
+  color: var(--white);
+  border-bottom-right-radius: 4px;
+}
+
+.ctime {
+  font-size: 10px;
+  color: var(--gray);
+  margin-top: 3px;
+  padding: 0 3px;
+}
+
+.cmsg.user .ctime { text-align: right; }
+
+.cquick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.cquick-btn {
+  background: transparent;
+  border: 1.5px solid var(--clay);
+  color: var(--clay);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cquick-btn:hover { background: var(--clay); color: var(--white); }
+
+.ctyping {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--sand);
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+  width: fit-content;
+}
+
+.ctyping span {
+  width: 6px; height: 6px;
+  background: var(--gray);
+  border-radius: 50%;
+  animation: tdot 1.2s infinite;
+}
+
+.ctyping span:nth-child(2) { animation-delay: 0.2s; }
+.ctyping span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes tdot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+.chat-input-row {
+  padding: 12px 14px;
+  border-top: 1px solid var(--mist);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.chat-input-row input {
+  flex: 1;
+  border: 1.5px solid var(--mist);
+  border-radius: 20px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  background: var(--sand);
+  color: var(--ink);
+  transition: border-color 0.2s;
+}
+
+.chat-input-row input:focus { border-color: var(--clay); }
+.chat-input-row input::placeholder { color: #bbb; }
+
+.csend {
+  width: 38px; height: 38px;
+  background: var(--clay);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.csend:hover { background: #b05e38; }
+.csend svg { fill: white; width: 16px; height: 16px; }
+
+/* FOOTER */
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.5);
+  padding: 40px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+footer strong { color: var(--clay); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 20px 60px; }
+  .hero-visual { display: none; }
+  .services { padding: 60px 20px; }
+  .about { padding: 60px 20px; }
+  .about-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hours { padding: 60px 20px; grid-template-columns: 1fr; gap: 40px; }
+  .chat-section { padding: 60px 20px; }
+  .chat-inner { grid-template-columns: 1fr; gap: 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Schnitt <span>&</span> Stil</a>
+  <ul class="nav-links">
+    <li><a href="#services">Leistungen</a></li>
+    <li><a href="#about">Über uns</a></li>
+    <li><a href="#hours">Öffnungszeiten</a></li>
+    <li><a href="#chat" class="nav-cta">Termin buchen</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Ihr Friseur in München</div>
+    <h1>Haare, die <em>für sich</em> sprechen.</h1>
+    <p>Wir schneiden, färben und stylen mit Leidenschaft. Seit über 15 Jahren das Vertrauen unserer Kunden.</p>
+    <div class="hero-btns">
+      <a href="#chat" class="btn-primary">Termin buchen</a>
+      <a href="#services" class="btn-secondary">Unsere Leistungen</a>
+    </div>
+  </div>
+  <div class="hero-visual">✂️</div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">Leistungen</div>
+  <h2 class="section-title">Was wir für Sie tun</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">✂️</div>
+      <h3>Haarschnitt</h3>
+      <p>Klassisch oder modern – wir beraten Sie und schneiden nach Ihren Wünschen.</p>
+      <div class="service-price">ab 35€ <span>/ Damen</span></div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <h3>Färben & Tönen</h3>
+      <p>Strahlende Farben, natürliche Töne oder Balayage – alles ist möglich.</p>
+      <div class="service-price">ab 65€</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💆</div>
+      <h3>Pflege & Treatments</h3>
+      <p>Intensive Haarkuren und Kopfmassagen für gesundes, glänzendes Haar.</p>
+      <div class="service-price">ab 25€</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧔</div>
+      <h3>Herrenschnitt</h3>
+      <p>Klassisch oder trendig – mit oder ohne Bart-Styling.</p>
+      <div class="service-price">ab 25€</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div>
+      <div class="section-label">Über uns</div>
+      <h2>Mehr als nur ein <em>Haarschnitt</em></h2>
+      <p>Bei Schnitt & Stil sind Sie mehr als nur ein Kunde. Wir nehmen uns Zeit für Sie, hören zu und zaubern den Look, den Sie sich wünschen.</p>
+      <p>Unser Team aus erfahrenen Stylistinnen und Stylisten bildet sich regelmäßig weiter und arbeitet ausschließlich mit hochwertigen Produkten.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Jahre Erfahrung</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2k+</div>
+        <div class="stat-label">Zufriedene Kunden</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Stylisten im Team</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4.9★</div>
+        <div class="stat-label">Google Bewertung</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="hours" id="hours">
+  <div>
+    <div class="section-label">Öffnungszeiten</div>
+    <h2 class="section-title">Wann wir für Sie da sind</h2>
+    <p style="color:var(--gray); font-size:15px; line-height:1.7; font-weight:300;">Kein Termin? Kein Problem – wir nehmen auch Walk-ins, solange Kapazität da ist. Am besten vorher kurz anfragen!</p>
+  </div>
+  <div class="hours-table">
+    <div class="hours-row"><span>Montag</span><span class="hours-closed">Geschlossen</span></div>
+    <div class="hours-row"><span>Dienstag</span><span>09:00 – 19:00</span></div>
+    <div class="hours-row"><span>Mittwoch</span><span>09:00 – 19:00</span></div>
+    <div class="hours-row today"><span>Donnerstag ← Heute</span><span>09:00 – 19:00</span></div>
+    <div class="hours-row"><span>Freitag</span><span>09:00 – 20:00</span></div>
+    <div class="hours-row"><span>Samstag</span><span>08:00 – 17:00</span></div>
+    <div class="hours-row"><span>Sonntag</span><span class="hours-closed">Geschlossen</span></div>
+  </div>
+</section>
+
+<!-- CHAT -->
+<section class="chat-section" id="chat">
+  <div class="chat-inner">
+    <div class="chat-intro">
+      <div class="section-label">Termin buchen</div>
+      <h2>Einfach fragen – Lisa antwortet sofort</h2>
+      <p>Kein langes Warten in der Telefonleitung. Lisa, unsere digitale Assistentin, ist rund um die Uhr für Sie da – für Termine, Preise und alle Fragen.</p>
+    </div>
+
+    <div class="chat-widget">
+      <div class="chat-widget-header">
+        <div class="chat-avatar">💇</div>
+        <div>
+          <h4>Lisa – Ihr Termin-Assistent</h4>
+          <p>Schnitt & Stil · Immer erreichbar</p>
+        </div>
+        <div class="chat-dot"></div>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="Ihre Nachricht..." />
+        <button class="csend" onclick="chatSend()">
+          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <strong>Schnitt & Stil</strong> · Leopoldstraße 42, 80802 München · 089 / 12 34 56 78</p>
+  <p style="margin-top:8px; font-size:11px;">Website erstellt mit KI-Technologie</p>
+</footer>
+
+<script>
+const SYSTEM = `Du bist Lisa, die freundliche digitale Assistentin des Friseursalons "Schnitt & Stil" in München.
+
+Salon-Infos:
+- Adresse: Leopoldstraße 42, 80802 München
+- Telefon: 089 / 12 34 56 78
+- Öffnungszeiten: Di–Fr 09:00–19:00, Fr bis 20:00, Sa 08:00–17:00, Mo+So geschlossen
+- Team: 6 Stylistinnen und Stylisten
+- Preise: Damenschnitt ab 35€, Herrenschnitt ab 25€, Färben ab 65€, Pflege ab 25€
+
+Für Terminbuchungen frage nach: Name, gewünschter Tag/Uhrzeit, gewünschte Leistung.
+
+Antworte immer auf Deutsch, freundlich und kurz (max 3 Sätze). Du bist warm, professionell und hilfsbereit.`;
+
+let history = [];
+let quickShown = false;
+
+function now() {
+  return new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+}
+
+function addMsg(text, who, quick = false) {
+  const box = document.getElementById('chatMessages');
+  const wrap = document.createElement('div');
+  wrap.className = `cmsg ${who}`;
+
+  const b = document.createElement('div');
+  b.className = 'cbubble';
+  b.textContent = text;
+
+  const t = document.createElement('div');
+  t.className = 'ctime';
+  t.textContent = now();
+
+  wrap.appendChild(b);
+  wrap.appendChild(t);
+
+  if (quick && !quickShown) {
+    quickShown = true;
+    const qr = document.createElement('div');
+    qr.className = 'cquick';
+    ['📅 Termin buchen', '💈 Preise', '🕐 Öffnungszeiten', '📍 Adresse'].forEach(r => {
+      const btn = document.createElement('button');
+      btn.className = 'cquick-btn';
+      btn.textContent = r;
+      btn.onclick = () => {
+        document.getElementById('chatInput').value = r.replace(/^.\s/, '');
+        chatSend();
+        qr.remove();
+      };
+      qr.appendChild(btn);
+    });
+    wrap.appendChild(qr);
+  }
+
+  box.appendChild(wrap);
+  box.scrollTop = box.scrollHeight;
+}
+
+function showTyping() {
+  const box = document.getElementById('chatMessages');
+  const d = document.createElement('div');
+  d.className = 'cmsg bot'; d.id = 'typing';
+  d.innerHTML = '<div class="ctyping"><span></span><span></span><span></span></div>';
+  box.appendChild(d);
+  box.scrollTop = box.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+async function chatSend() {
+  const inp = document.getElementById('chatInput');
+  const txt = inp.value.trim();
+  if (!txt) return;
+  inp.value = '';
+  addMsg(txt, 'user');
+  history.push({ role: 'user', content: txt });
+  showTyping();
+  try {
+    const res = await fetch('/.netlify/functions/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ system: SYSTEM, messages: history })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Entschuldigung, bitte versuchen Sie es erneut.';
+    removeTyping();
+    history.push({ role: 'assistant', content: reply });
+    addMsg(reply, 'bot');
+  } catch {
+    removeTyping();
+    addMsg('Kurze technische Störung – bitte gleich nochmal versuchen!', 'bot');
+  }
+}
+
+document.getElementById('chatInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') chatSend();
+});
+
+setTimeout(() => {
+  addMsg('Hallo! 👋 Ich bin Lisa von Schnitt & Stil. Wie kann ich Ihnen helfen – möchten Sie einen Termin buchen oder haben Sie Fragen?', 'bot', true);
+}, 600);
+</script>
+</body>
+</html>
